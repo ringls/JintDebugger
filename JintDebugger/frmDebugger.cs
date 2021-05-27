@@ -25,20 +25,20 @@ namespace JintDebugger
         /// </summary>
         Debugger db;
 
-    
         public frmDebugger()
         {
-        
+
             db = new Debugger();
 
-
             db.OnBegin += Db_OnBegin;
-            //db.OnBreak += Db_OnBreak;//断点事件
             db.OnStep += Db_OnStep;//步进事件
             db.OnEnd += Db_OnEnd;//结束事件
             db.OnError += Db_OnError;//出错事件
 
             InitializeComponent();
+
+            //this.dgInfo.AutoGenerateColumns = false;
+
             SetControlsStatus(false);
             //自定义代码高亮
             this.txtCode.SetHighlighting("JavaScript");
@@ -95,41 +95,78 @@ function add(x,y){
             ShowDebugInfo(e);
         }
 
-        //private void Db_OnBreak(object obj, DebugInformation e)
-        //{
-        //    ShowDebugInfo(e);
-        //}
-
-        public void ShowDebugInfo(DebugInformation e)
+        private void ShowDebugInfo(DebugInformation e)
         {
             //将数据展示在监视中
             IList<LocalVariable> list = new List<LocalVariable>();
             foreach (var item in e.Locals)
             {
-                if (item.Value.IsObject() == true || item.Value.IsArray() == true)
+                if (item.Key != "arguments")
                 {
-                    var obj = item.Value.ToObject();
-                    list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = Newtonsoft.Json.JsonConvert.SerializeObject(obj) });
+                    list.Add(GetLocalVariableJS(item.Key, item.Value));
                 }
-                else
-                {
-                    list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = item.Value.ToString() });
-                }
+                //if (item.Value.IsObject() == true)
+                //{
+                //    list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = item.Value.ToString(), Obj = item.Value.ToObject() });
+
+                //}
+                //else
+                //{
+                //    list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = item.Value.ToString() });
+
+                //}
+                /*
+         if (item.Value.IsObject() == true)
+         {
+             var obj = item.Value.ToObject();
+             list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = Newtonsoft.Json.JsonConvert.SerializeObject(obj,) });
+
+             var obj = item.Value.ToObject();
+             var type = obj.GetType();
+             //是否数组
+             if (type.IsGenericType)
+             {
+                 //判断长度
+                 int count = Convert.ToInt32(type.GetProperty("Count").GetValue(obj, null));
+                 if (count > 0)
+                 {
+                     var subObject = type.GetProperty("Item").GetValue(obj, new object[] { 0 });
+                     var subType = subObject.GetType();
+                     if (subType.Name == "DapperRow" || subType.Name == "ExpandoObject")
+                     {
+                         list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = Newtonsoft.Json.JsonConvert.SerializeObject(obj) });
+                     }
+                     else
+                     {
+                         list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = item.Value.ToString() });
+                     }
+                 }
+                 else
+                 {
+                     list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = item.Value.ToString() });
+                 }
+             }
+             else if (type.Name == "ExpandoObject")
+             {
+                 list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = Newtonsoft.Json.JsonConvert.SerializeObject(obj) });
+             }
+             else
+             {
+                 list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = item.Value.ToString() });
+             }
+
+         }
+         else
+         {
+             list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = item.Value.ToString() });
+         }*/
             }
             //将入参放入监视列表中
             foreach (var item in e.Globals)
             {
                 if (item.Key == "model")
                 {
-                    if (item.Value.IsObject() == true || item.Value.IsArray() == true)
-                    {
-                        var obj = item.Value.ToObject();
-                        list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = Newtonsoft.Json.JsonConvert.SerializeObject(obj) });
-                    }
-                    else
-                    {
-                        list.Add(new LocalVariable() { Name = item.Key, TypeName = item.Value.Type.ToString(), Value = item.Value.ToString() });
-                    }
+                    list.Add(GetLocalVariableJS(item.Key, item.Value));
                 }
             }
 
@@ -144,6 +181,111 @@ function add(x,y){
             var caretMark = new CaretMark(this.txtCode.Document, position);
             //展示当前运行行
             SetCaretMark(caretMark);
+        }
+
+        private LocalVariable GetLocalVariableJS(string key, JsValue value)
+        {
+            var result = new LocalVariable() { Name = key, TypeName = value.Type.ToString() };
+            if (value.IsArray())
+            {
+                var trueValue = value.AsArray();
+                if (trueValue.GetLength() > 0)
+                {
+                    var props = trueValue.GetOwnProperties();
+                    foreach (var item in props)
+                    {
+                        var ch = GetLocalVariableJS(item.Key, item.Value.Value);
+                        result.Children.Add(ch);
+                    }
+                }
+                //result.Value=trueValue.
+            }
+            else if (value.IsBoolean())
+            {
+                var trueValue = value.AsBoolean();
+                result.Value = trueValue.ToString();
+            }
+            else if (value.IsDate())
+            {
+                var trueValue = value.AsDate();
+                result.Value = trueValue.ToDateTime().ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            else if (value.IsNumber())
+            {
+                var trueValue = value.AsNumber();
+                result.Value = trueValue.ToString();
+            }
+            else if (value.IsString())
+            {
+                var trueValue = value.AsString();
+                result.Value = trueValue;
+            }
+            else if (value.IsObject())
+            {
+                var trueValue = value.AsObject();
+                //判断对象是否原生JS              
+                if (trueValue.GetType().Name == "ObjectInstance")
+                {
+                    var props = trueValue.GetOwnProperties();
+                    foreach (var item in props)
+                    {
+                        var ch = GetLocalVariableJS(item.Key, item.Value.Value);
+                        result.Children.Add(ch);
+                    }
+                }
+                else
+                {
+                    var csharpValue = value.ToObject();
+                    if (csharpValue != null)
+                    {
+                        //只处理DapperRow
+                        result = GetLocalVariableCSharp(key, csharpValue);
+                        //csharpValue.
+                    }
+                }
+            }
+            return result;
+        }
+
+        private LocalVariable GetLocalVariableCSharp(string key, object obj)
+        {
+            if (obj != null)
+            {
+                var type = obj.GetType();
+                var result = new LocalVariable() { Name = key, TypeName = type.Name };
+                //是否泛型
+                if (type.IsGenericType)
+                {
+                    //判断长度
+                    int count = Convert.ToInt32(type.GetProperty("Count").GetValue(obj, null));
+                    if (count > 0)
+                    {
+                        for (var i = 0; i < count; i++)
+                        {
+                            var subObject = type.GetProperty("Item").GetValue(obj, new object[] { i });
+                            result.Children.Add(GetLocalVariableCSharp(i.ToString(), subObject));
+                        }
+                    }
+                }
+                else if (type.Name == "DapperRow" || type.Name == "ExpandoObject")
+                {
+                    var dict = (IDictionary<string, object>)obj;
+                    foreach (var prop in dict)
+                    {
+                        result.Children.Add(GetLocalVariableCSharp(prop.Key, prop.Value));
+                    }
+                }
+                else if (type.Name == "String" || type.Name == "Double" || type.Name == "Int32" || type.Name == "DateTime")
+                {
+                    result.Value = obj.ToString();
+                }
+
+                return result;
+            }
+            else
+            {
+                return new LocalVariable() { Name = key, TypeName = "Undefined" };
+            }
         }
 
         private void IconBarMargin_MouseDown(AbstractMargin sender, Point mousepos, MouseButtons mouseButtons)
@@ -259,7 +401,7 @@ function add(x,y){
                         return;
                 }
                 var d = new SetCaretMarkCallback(SetCaretMark);
-                this.dgInfo.Invoke(d, new object[] { caretMark });
+                this.txtCode.Invoke(d, new object[] { caretMark });
             }
             else
             {
@@ -294,22 +436,24 @@ function add(x,y){
         delegate void ShowLocalVariableListCallback(IList<LocalVariable> list);
         private void ShowLocalVariableList(IList<LocalVariable> list)
         {
-            if (this.dgInfo.InvokeRequired)//如果调用控件的线程和创建创建控件的线程不是同一个则为True
+            if (this.lvInfo.InvokeRequired)//如果调用控件的线程和创建创建控件的线程不是同一个则为True
             {
-                while (!this.dgInfo.IsHandleCreated)
+                while (!this.lvInfo.IsHandleCreated)
                 {
                     //解决窗体关闭时出现“访问已释放句柄“的异常
-                    if (this.dgInfo.Disposing || this.dgInfo.IsDisposed)
+                    if (this.lvInfo.Disposing || this.lvInfo.IsDisposed)
                         return;
                 }
                 var d = new ShowLocalVariableListCallback(ShowLocalVariableList);
-                this.dgInfo.Invoke(d, new object[] { list });
+                this.lvInfo.Invoke(d, new object[] { list });
             }
             else
             {
                 lock (locker)
                 {
-                    this.dgInfo.DataSource = list;
+                    //this.dgInfo.DataSource = list;
+                    this.lvInfo.Roots = list;
+                    this.lvInfo.Refresh();
                 }
             }
         }
@@ -349,6 +493,8 @@ function add(x,y){
 
         private void btnRun_Click(object sender, EventArgs e)
         {
+            //入参判断是否json
+
             //var thread = new Thread(() => ThreadProc(this.txtCode.Text, BreakPoints));
             //CurrentDebugStatus = 0;
             //thread.Start();
@@ -371,7 +517,7 @@ function add(x,y){
                 var instance = new JintDebugInstance()
                 {
                     Script = this.txtCode.Text,
-                    BreakPoints = BreakPoints,            
+                    BreakPoints = BreakPoints,
                     InputJson = this.txtInput.Text.Trim()
                 };
                 db.Run(instance);
@@ -395,7 +541,7 @@ function add(x,y){
             db.StepOut();
             //db.Step(StepMode.Out);
         }
-    
+
 
         private void btnPause_Click(object sender, EventArgs e)
         {
@@ -429,6 +575,46 @@ function add(x,y){
                 e.Handled = true;
                 btnStepInto.PerformClick();
             }
+        }
+
+        private void dgInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //LocalVariable item = dgInfo.Rows[e.RowIndex].DataBoundItem as LocalVariable;
+            //if (item.Obj != null)
+            //{
+            //    pgItem.SelectedObject = item.Obj;
+            //}
+        }
+
+        private void frmDebugger_Load(object sender, EventArgs e)
+        {
+            this.tabPage1.Show();
+            this.tabPage2.Show();
+            this.tabPage3.Show();
+
+            //是否允许展开
+            this.lvInfo.CanExpandGetter = delegate (object x)
+            {
+                return ((LocalVariable)x).Children.Count > 0;
+            };
+            //可以展开的获取此条数据的子集。
+            this.lvInfo.ChildrenGetter = delegate (object x)
+            {
+                try
+                {
+                    return ((LocalVariable)x).Children;
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    this.BeginInvoke((MethodInvoker)delegate ()
+                    {
+                        this.lvInfo.Collapse(x);
+                        MessageBox.Show(this, ex.Message, "ObjectListViewDemo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    });
+                    return new List<LocalVariable>();
+                }
+            };
+
         }
     }
 }

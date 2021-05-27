@@ -28,23 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgInfo = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtInput = new System.Windows.Forms.TextBox();
-            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.components = new System.ComponentModel.Container();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtInput = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtOutPut = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lvInfo = new BrightIdeasSoftware.TreeListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.panel5 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -57,194 +52,139 @@
             this.btnStepInto = new System.Windows.Forms.ToolStripButton();
             this.btnStepOver = new System.Windows.Forms.ToolStripButton();
             this.btnStepOut = new System.Windows.Forms.ToolStripButton();
-            this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgInfo)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lvInfo)).BeginInit();
             this.panel5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel2
+            // panel4
             // 
-            this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 562);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(5);
-            this.panel2.Size = new System.Drawing.Size(784, 100);
-            this.panel2.TabIndex = 5;
+            this.panel4.Controls.Add(this.tabControl1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 361);
+            this.panel4.Name = "panel4";
+            this.panel4.Padding = new System.Windows.Forms.Padding(5);
+            this.panel4.Size = new System.Drawing.Size(784, 200);
+            this.panel4.TabIndex = 9;
             // 
-            // groupBox1
+            // tabControl1
             // 
-            this.groupBox1.Controls.Add(this.dgInfo);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(5, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(774, 90);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "监视";
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(5, 5);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(774, 190);
+            this.tabControl1.TabIndex = 1;
             // 
-            // dgInfo
+            // tabPage1
             // 
-            this.dgInfo.AllowUserToAddRows = false;
-            this.dgInfo.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgInfo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgInfo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgInfo.Location = new System.Drawing.Point(5, 19);
-            this.dgInfo.Name = "dgInfo";
-            this.dgInfo.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgInfo.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgInfo.RowTemplate.Height = 23;
-            this.dgInfo.Size = new System.Drawing.Size(764, 66);
-            this.dgInfo.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Name";
-            this.Column1.HeaderText = "名称";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "TypeName";
-            this.Column2.HeaderText = "类型";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.DataPropertyName = "Value";
-            this.Column3.HeaderText = "值";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter1.Location = new System.Drawing.Point(0, 559);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(784, 3);
-            this.splitter1.TabIndex = 6;
-            this.splitter1.TabStop = false;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.groupBox2);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 25);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(784, 100);
-            this.panel3.TabIndex = 7;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtInput);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(5, 5);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox2.Size = new System.Drawing.Size(774, 90);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "入参";
+            this.tabPage1.Controls.Add(this.txtInput);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(766, 164);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "入参";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // txtInput
             // 
             this.txtInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInput.Location = new System.Drawing.Point(5, 19);
+            this.txtInput.Location = new System.Drawing.Point(3, 3);
             this.txtInput.Multiline = true;
             this.txtInput.Name = "txtInput";
             this.txtInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtInput.Size = new System.Drawing.Size(764, 66);
+            this.txtInput.Size = new System.Drawing.Size(760, 158);
             this.txtInput.TabIndex = 0;
             // 
-            // splitter2
+            // tabPage2
             // 
-            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(0, 125);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(784, 3);
-            this.splitter2.TabIndex = 8;
-            this.splitter2.TabStop = false;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.groupBox3);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 459);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(5);
-            this.panel4.Size = new System.Drawing.Size(784, 100);
-            this.panel4.TabIndex = 9;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txtOutPut);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(5, 5);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox3.Size = new System.Drawing.Size(774, 90);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "返回值";
+            this.tabPage2.Controls.Add(this.txtOutPut);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(766, 64);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "出参";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtOutPut
             // 
             this.txtOutPut.BackColor = System.Drawing.SystemColors.Window;
             this.txtOutPut.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtOutPut.Location = new System.Drawing.Point(5, 19);
+            this.txtOutPut.Location = new System.Drawing.Point(3, 3);
             this.txtOutPut.Multiline = true;
             this.txtOutPut.Name = "txtOutPut";
             this.txtOutPut.ReadOnly = true;
             this.txtOutPut.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtOutPut.Size = new System.Drawing.Size(764, 66);
+            this.txtOutPut.Size = new System.Drawing.Size(760, 58);
             this.txtOutPut.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.lvInfo);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(766, 64);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "监视";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lvInfo
+            // 
+            this.lvInfo.AllColumns.Add(this.olvColumn1);
+            this.lvInfo.AllColumns.Add(this.olvColumn2);
+            this.lvInfo.AllColumns.Add(this.olvColumn3);
+            this.lvInfo.CellEditUseWholeCell = false;
+            this.lvInfo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3});
+            this.lvInfo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lvInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvInfo.HideSelection = false;
+            this.lvInfo.Location = new System.Drawing.Point(3, 3);
+            this.lvInfo.Name = "lvInfo";
+            this.lvInfo.ShowGroups = false;
+            this.lvInfo.Size = new System.Drawing.Size(760, 58);
+            this.lvInfo.TabIndex = 1;
+            this.lvInfo.UseCompatibleStateImageBehavior = false;
+            this.lvInfo.View = System.Windows.Forms.View.Details;
+            this.lvInfo.VirtualMode = true;
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "Name";
+            this.olvColumn1.Text = "名称";
+            this.olvColumn1.Width = 200;
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "TypeName";
+            this.olvColumn2.Text = "类型";
+            this.olvColumn2.Width = 100;
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "Value";
+            this.olvColumn3.Text = "值";
+            this.olvColumn3.Width = 200;
             // 
             // splitter3
             // 
             this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter3.Location = new System.Drawing.Point(0, 456);
+            this.splitter3.Location = new System.Drawing.Point(0, 358);
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(784, 3);
             this.splitter3.TabIndex = 10;
@@ -254,10 +194,10 @@
             // 
             this.panel5.Controls.Add(this.groupBox4);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 128);
+            this.panel5.Location = new System.Drawing.Point(0, 25);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(5);
-            this.panel5.Size = new System.Drawing.Size(784, 328);
+            this.panel5.Size = new System.Drawing.Size(784, 333);
             this.panel5.TabIndex = 11;
             // 
             // groupBox4
@@ -267,7 +207,7 @@
             this.groupBox4.Location = new System.Drawing.Point(5, 5);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox4.Size = new System.Drawing.Size(774, 318);
+            this.groupBox4.Size = new System.Drawing.Size(774, 323);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "JS脚本";
@@ -279,7 +219,7 @@
             this.txtCode.IsReadOnly = false;
             this.txtCode.Location = new System.Drawing.Point(5, 19);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(764, 294);
+            this.txtCode.Size = new System.Drawing.Size(764, 299);
             this.txtCode.TabIndex = 0;
             // 
             // toolStrip1
@@ -354,7 +294,6 @@
             this.btnStepOver.Name = "btnStepOver";
             this.btnStepOver.Size = new System.Drawing.Size(23, 22);
             this.btnStepOver.Text = "跳过";
-            this.btnStepOver.Visible = false;
             this.btnStepOver.Click += new System.EventHandler(this.btnStepOver_Click);
             // 
             // btnStepOut
@@ -371,28 +310,24 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 662);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.splitter3);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.splitter2);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip1);
             this.KeyPreview = true;
             this.Name = "frmDebugger";
             this.Text = "动态后台JS脚本调试工具";
+            this.Load += new System.EventHandler(this.frmDebugger_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmDebugger_KeyDown);
-            this.panel2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgInfo)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lvInfo)).EndInit();
             this.panel5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
@@ -403,25 +338,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgInfo;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtInput;
-        private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox txtOutPut;
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.GroupBox groupBox4;
         private ICSharpCode.TextEditor.TextEditorControl txtCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnRun;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -430,6 +351,16 @@
         private System.Windows.Forms.ToolStripButton btnStepOut;
         private System.Windows.Forms.ToolStripButton btnPause;
         private System.Windows.Forms.ToolStripButton btnStop;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox txtInput;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox txtOutPut;
+        private System.Windows.Forms.TabPage tabPage3;
+        private BrightIdeasSoftware.TreeListView lvInfo;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
     }
 }
 

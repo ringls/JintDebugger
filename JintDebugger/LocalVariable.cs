@@ -10,5 +10,17 @@ namespace JintDebugger
         public string Name { get; set; }
         public string TypeName { get; set; }
         public string Value { get; set; }
+        private IList<LocalVariable> _Children = null;
+        public IList<LocalVariable> Children
+        {
+            get
+            {
+                if (this._Children == null)
+                {
+                    this._Children = new List<LocalVariable>();
+                }
+                return this._Children;
+            }
+        }
     }
 }

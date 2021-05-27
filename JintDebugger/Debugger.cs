@@ -37,7 +37,7 @@ namespace JintDebugger
         /// <summary>
         /// 步进方式
         /// </summary>
-        private StepMode _stepMode;
+        private StepMode _stepMode = StepMode.Out;
 
         /// <summary>
         /// 脚本引擎
@@ -85,7 +85,6 @@ namespace JintDebugger
             if (IsRunning == false)
             {
                 thread = new Thread(() => ThreadProc(instance));
-                _breakType = BreakType.Break;
                 thread.Start();
                 if (this.OnBegin != null)
                 {
@@ -165,17 +164,25 @@ namespace JintDebugger
             IsRunning = true;
             try
             {
+                //_breakType = BreakType.Break;
                 _breakType = BreakType.Break;
-                var engine = new Engine(cfg => cfg.AllowClr(typeof(DataSet).Assembly).CatchClrExceptions().DebugMode());
+                BreakOnNextStatement = true;
 
-          
+                _breakType = BreakType.Step;
+                BreakOnNextStatement = false;
+
+                engine = new Engine(cfg => cfg.AllowClr(typeof(DataSet).Assembly).CatchClrExceptions().DebugMode());
+
                 if (instance.InputJson != "")
                 {
                     engine.SetValue("strjson", instance.InputJson);
                     engine.Execute("var model=JSON.parse(strjson);");
                 }
-           
-       
+
+                //增加一个excel帮助类
+                //var excel = new JIntExcelHelepr();
+                //engine.SetValue("excel", excel);
+
                 foreach (var bp in instance.BreakPoints)
                 {
                     engine.BreakPoints.Add(new BreakPoint(bp.Line, bp.Column));
@@ -204,10 +211,10 @@ namespace JintDebugger
             }
         }
 
-     
 
         private StepMode Engine_Break(object sender, DebugInformation e)
         {
+            BreakOnNextStatement = true;
             return ProcessStep(sender, e);
         }
 
@@ -250,6 +257,6 @@ namespace JintDebugger
         //建立一个错误事件
         public event JintErrorDelegate OnError;
 
-    }
+    } 
 
 }
